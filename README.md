@@ -1,5 +1,7 @@
 
-# react-native-syan-image-picker
+# fork from react-native-syan-image-picker
+### this is a fork, and is not maintained by me, please contact the original author if you need more information.
+
 
 ## 功能介绍
 

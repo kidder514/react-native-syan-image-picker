@@ -119,22 +119,22 @@ public class RNSyanImagePickerModule extends ReactContextBaseJavaModule {
                 .imageFormat(PictureMimeType.PNG)// 拍照保存图片格式后缀,默认jpeg
                 .isZoomAnim(true)// 图片列表点击 缩放效果 默认true
                 .sizeMultiplier(0.5f)// glide 加载图片大小 0~1之间 如设置 .glideOverride()无效
-                .enableCrop(isCrop)// 是否裁剪 true or false
-                .compress(true)// 是否压缩 true or false
+                // .enableCrop(isCrop)// 是否裁剪 true or false
+                // .compress(false)// 是否压缩 true or false
                 .glideOverride(160, 160)// int glide 加载宽高，越小图片列表越流畅，但会影响列表图片浏览的清晰度
-                .withAspectRatio(CropW, CropH)// int 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
-                .hideBottomControls(isCrop)// 是否显示uCrop工具栏，默认不显示 true or false
+                // .withAspectRatio(CropW, CropH)// int 裁剪比例 如16:9 3:2 3:4 1:1 可自定义
+                // .hideBottomControls(isCrop)// 是否显示uCrop工具栏，默认不显示 true or false
                 .isGif(isGif)// 是否显示gif图片 true or false
-                .freeStyleCropEnabled(true)// 裁剪框是否可拖拽 true or false
-                .circleDimmedLayer(showCropCircle)// 是否圆形裁剪 true or false
-                .showCropFrame(showCropFrame)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
-                .showCropGrid(showCropGrid)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
+                // .freeStyleCropEnabled(true)// 裁剪框是否可拖拽 true or false
+                // .circleDimmedLayer(showCropCircle)// 是否圆形裁剪 true or false
+                // .showCropFrame(showCropFrame)// 是否显示裁剪矩形边框 圆形裁剪时建议设为false   true or false
+                // .showCropGrid(showCropGrid)// 是否显示裁剪矩形网格 圆形裁剪时建议设为false    true or false
                 .openClickSound(false)// 是否开启点击声音 true or false
-                .cropCompressQuality(quality)// 裁剪压缩质量 默认90 int
-                .minimumCompressSize(100)// 小于100kb的图片不压缩
-                .synOrAsy(true)//同步true或异步false 压缩 默认同步
-                .rotateEnabled(true) // 裁剪是否可旋转图片 true or false
-                .scaleEnabled(true)// 裁剪是否可放大缩小图片 true or false
+                // .cropCompressQuality(quality)// 裁剪压缩质量 默认90 int
+                // .minimumCompressSize(100)// 小于100kb的图片不压缩
+                // .synOrAsy(true)//同步true或异步false 压缩 默认同步
+                // .rotateEnabled(true) // 裁剪是否可旋转图片 true or false
+                // .scaleEnabled(true)// 裁剪是否可放大缩小图片 true or false
                 //.videoQuality(0)// 视频录制质量 0 or 1 int
                 //.videoMaxSecond(15)// 显示多少秒以内的视频or音频也可适用 int
                 //.videoMinSecond(10)// 显示多少秒以内的视频or音频也可适用 int
@@ -191,49 +191,49 @@ public class RNSyanImagePickerModule extends ReactContextBaseJavaModule {
                         BitmapFactory.Options options = new BitmapFactory.Options();
 
                         options.inJustDecodeBounds = true;
-                        if (!media.isCompressed()) {
-                            BitmapFactory.decodeFile(media.getPath(), options);
+                        // if (!media.isCompressed()) {
+                            // BitmapFactory.decodeFile(media.getPath(), options);
                             aImage.putDouble("width", options.outWidth);
                             aImage.putDouble("height", options.outHeight);
                             aImage.putString("type", "image");
                             aImage.putString("uri", "file://" + media.getPath());
 
                             //decode to bitmap
-                            Bitmap bitmap = BitmapFactory.decodeFile(media.getPath());
+                            // Bitmap bitmap = BitmapFactory.decodeFile(media.getPath());
                             //convert to byte array
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                            byte[] bytes = baos.toByteArray();
+                            // ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                            // bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                            // byte[] bytes = baos.toByteArray();
                             //base64 encode
-                            byte[] encode = Base64.encode(bytes,Base64.DEFAULT);
-                            String encodeString = new String(encode);
-                            aImage.putString("base64", encodeString);
+                            // byte[] encode = Base64.encode(bytes,Base64.DEFAULT);
+                            // String encodeString = new String(encode);
+                            // aImage.putString("base64", encodeString);
 
-                        } else {
-                            // 压缩过，取 media.getCompressPath();
-                            BitmapFactory.decodeFile(media.getCompressPath(), options);
-                            aImage.putDouble("width", options.outWidth);
-                            aImage.putDouble("height", options.outHeight);
-                            aImage.putString("type", "image");
-                            aImage.putString("uri", "file://" + media.getCompressPath());
+                        // } else {
+                        //     // 压缩过，取 media.getCompressPath();
+                        //     BitmapFactory.decodeFile(media.getCompressPath(), options);
+                        //     aImage.putDouble("width", options.outWidth);
+                        //     aImage.putDouble("height", options.outHeight);
+                        //     aImage.putString("type", "image");
+                        //     aImage.putString("uri", "file://" + media.getCompressPath());
 
-                            //decode to bitmap
-                            Bitmap bitmap = BitmapFactory.decodeFile(media.getCompressPath());
-                            //convert to byte array
-                            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                            byte[] bytes = baos.toByteArray();
-                            //base64 encode
-                            byte[] encode = Base64.encode(bytes,Base64.DEFAULT);
-                            String encodeString = new String(encode);
-                            aImage.putString("base64", encodeString);
-                        }
+                        //     //decode to bitmap
+                        //     Bitmap bitmap = BitmapFactory.decodeFile(media.getCompressPath());
+                        //     //convert to byte array
+                        //     ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        //     bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                        //     byte[] bytes = baos.toByteArray();
+                        //     //base64 encode
+                        //     byte[] encode = Base64.encode(bytes,Base64.DEFAULT);
+                        //     String encodeString = new String(encode);
+                        //     aImage.putString("base64", encodeString);
+                        // }
 
-                        if (media.isCut()) {
-                            aImage.putString("original_uri", "file://" + media.getCutPath());
-                        } else {
+                        // if (media.isCut()) {
+                            // aImage.putString("original_uri", "file://" + media.getCutPath());
+                        // } else {
                             aImage.putString("original_uri", "file://" + media.getPath());
-                        }
+                        // }
 
                         imageList.pushMap(aImage);
                     }
